@@ -1,0 +1,23 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: flask-deployment
+  labels:
+    app: flask-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: flask-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - image: denstorti/app_flask:0.1
+        name: simple-flask-app
+        ports:
+          - containerPort: 5000
